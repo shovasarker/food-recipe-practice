@@ -1,7 +1,9 @@
+import AllPages from './pages/AllPages'
+
 function App() {
   return (
     <div className='App'>
-      <h1>Hello</h1>
+      <AllPages />
     </div>
   )
 }

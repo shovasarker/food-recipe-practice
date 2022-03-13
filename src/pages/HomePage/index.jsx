@@ -4,8 +4,8 @@ import Veggie from '../../components/Veggie'
 const HomePage = () => {
   return (
     <>
-      <Popular />
       <Veggie />
+      <Popular />
     </>
   )
 }

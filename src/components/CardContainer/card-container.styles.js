@@ -10,9 +10,9 @@ export const Title = styled.h3`
 
 export const Card = styled.div`
   position: relative;
-  border-radius: 2rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   overflow: hidden;
+  cursor: grab;
 
   img {
     width: 100%;
@@ -31,7 +31,7 @@ export const Card = styled.div`
     width: 100%;
     text-align: center;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.8rem;
     height: 40%;
     display: flex;
     justify-content: center;

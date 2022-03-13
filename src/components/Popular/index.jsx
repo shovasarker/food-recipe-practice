@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Gradient, Title, Wrapper } from './popular.styled'
-import { Splide, SplideSlide } from '@splidejs/react-splide'
-import '@splidejs/splide/dist/css/splide.min.css'
+import { fetchRecipes } from '../../Api'
+import CardContainer from '../CardContainer'
 
 const Popular = () => {
   const [popular, setPopular] = useState([])
 
   const getPopular = async () => {
-    const res = await fetch(
-      `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9`
-    )
-    const data = await res.json()
-    setPopular(data.recipes)
+    const popularFromSessionStorage = sessionStorage.getItem('popular')
+    if (popularFromSessionStorage) {
+      setPopular(JSON.parse(popularFromSessionStorage))
+      return
+    }
+    const recipes = await fetchRecipes()
+    setPopular(recipes)
+    sessionStorage.setItem('popular', JSON.stringify(recipes))
   }
 
   useEffect(() => {
@@ -19,30 +21,7 @@ const Popular = () => {
   }, [])
 
   return (
-    <Wrapper>
-      <Title>Popular Recipes</Title>
-      <Splide
-        options={{
-          perPage: 4,
-          gap: '1rem',
-          arrows: false,
-          pagination: false,
-          drag: 'free',
-        }}
-      >
-        {popular?.map(({ id, title, image }) => {
-          return (
-            <SplideSlide key={id}>
-              <Card>
-                <p>{title}</p>
-                <img src={image} alt={title} />
-                <Gradient />
-              </Card>
-            </SplideSlide>
-          )
-        })}
-      </Splide>
-    </Wrapper>
+    <CardContainer recipes={popular} title={'Popular Recipes'} perPage={5} />
   )
 }
 

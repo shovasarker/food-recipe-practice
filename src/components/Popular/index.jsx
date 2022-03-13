@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { Card, Gradient, Title, Wrapper } from './popular.styled'
+import { Splide, SplideSlide } from '@splidejs/react-splide'
+import '@splidejs/splide/dist/css/splide.min.css'
 
 const Popular = () => {
   const [popular, setPopular] = useState([])
@@ -16,11 +19,30 @@ const Popular = () => {
   }, [])
 
   return (
-    <div>
-      {popular?.map(({ title, id }) => {
-        return <h2 key={id}>{title}</h2>
-      })}
-    </div>
+    <Wrapper>
+      <Title>Popular Recipes</Title>
+      <Splide
+        options={{
+          perPage: 4,
+          gap: '1rem',
+          arrows: false,
+          pagination: false,
+          drag: 'free',
+        }}
+      >
+        {popular?.map(({ id, title, image }) => {
+          return (
+            <SplideSlide key={id}>
+              <Card>
+                <p>{title}</p>
+                <img src={image} alt={title} />
+                <Gradient />
+              </Card>
+            </SplideSlide>
+          )
+        })}
+      </Splide>
+    </Wrapper>
   )
 }
 

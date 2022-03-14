@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { fetchRecipes } from '../../Api'
 import CustomGrid from '../../components/CustomGrid'
 import Spinner from '../../components/Spinner'

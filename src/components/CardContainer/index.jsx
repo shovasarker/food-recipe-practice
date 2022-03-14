@@ -10,15 +10,15 @@ const CardContainer = ({ recipes, title, perPage }) => {
       <Title>{title}</Title>
       <Splide
         options={{
-          perPage: perPage - 3,
+          perPage: perPage > 3 ? perPage - 3 : 1,
           mediaQuery: 'min',
           breakpoints: {
             768: {
-              perPage: perPage - 2,
+              perPage: perPage > 3 ? perPage - 2 : 2,
               drag: 'free',
             },
             1024: {
-              perPage: perPage - 1,
+              perPage: perPage > 3 ? perPage - 1 : 3,
             },
             1280: {
               perPage: perPage,

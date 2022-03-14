@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { fetchRecipes } from '../../Api'
 import Spinner from '../../components/Spinner'
 import CustomGrid from '../../components/CustomGrid'

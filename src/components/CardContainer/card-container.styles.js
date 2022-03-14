@@ -16,7 +16,7 @@ export const Card = styled.div`
 
   img {
     width: 100%;
-    aspect-ratio: 4/3;
+    aspect-ratio: 4 / ${({ perPage }) => (perPage > 3 ? perPage : 3)};
     object-fit: cover;
     border-radius: 1rem;
   }

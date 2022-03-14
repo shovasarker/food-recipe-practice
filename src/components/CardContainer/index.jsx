@@ -3,6 +3,7 @@ import { Card, Gradient, Title, Wrapper } from './card-container.styles.js'
 import noImage from '../../images/no_image.jpg'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/splide/dist/css/splide.min.css'
+import { Link } from 'react-router-dom'
 
 const CardContainer = ({ recipes, title, perPage }) => {
   return (
@@ -32,10 +33,12 @@ const CardContainer = ({ recipes, title, perPage }) => {
         {recipes?.map(({ id, title, image }) => {
           return (
             <SplideSlide key={id}>
-              <Card>
-                <p>{title}</p>
-                <img src={image ? image : noImage} alt={title} />
-                <Gradient />
+              <Card perPage={perPage}>
+                <Link to={`/recipe/${id}`}>
+                  <p>{title}</p>
+                  <img src={image ? image : noImage} alt={title} />
+                  <Gradient />
+                </Link>
               </Card>
             </SplideSlide>
           )

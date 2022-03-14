@@ -11,10 +11,19 @@ const CuisinePage = () => {
   const { cuisineType } = useParams()
 
   const getCuisine = async (cuisineType) => {
-    setIsFetching(true)
-    const data = await fetchRecipes('complexSearch', 'cuisine', cuisineType, 20)
-    setCuisines(data.results)
-    setIsFetching(false)
+    try {
+      setIsFetching(true)
+      const data = await fetchRecipes(
+        'complexSearch',
+        'cuisine',
+        cuisineType,
+        20
+      )
+      setCuisines(data.results)
+      setIsFetching(false)
+    } catch (error) {
+      console.log(error.message)
+    }
   }
   useEffect(() => {
     getCuisine(cuisineType)

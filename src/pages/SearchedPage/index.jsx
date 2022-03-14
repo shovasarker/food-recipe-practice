@@ -10,10 +10,14 @@ const SearchedPage = () => {
   const { searchTerm } = useParams()
 
   const getCuisine = async (searchTerm) => {
-    setIsFetching(true)
-    const data = await fetchRecipes('complexSearch', 'query', searchTerm, 20)
-    setSearched(data.results)
-    setIsFetching(false)
+    try {
+      setIsFetching(true)
+      const data = await fetchRecipes('complexSearch', 'query', searchTerm, 20)
+      setSearched(data.results)
+      setIsFetching(false)
+    } catch (error) {
+      console.log(error.message)
+    }
   }
   useEffect(() => {
     getCuisine(searchTerm)

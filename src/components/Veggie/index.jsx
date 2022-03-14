@@ -8,17 +8,21 @@ const Veggie = () => {
   const [isFetching, setIsFetching] = useState(false)
 
   const getVeggie = async () => {
-    setIsFetching(true)
-    const popularFromSessionStorage = sessionStorage.getItem('veggie')
-    if (popularFromSessionStorage) {
-      setVeggie(JSON.parse(popularFromSessionStorage))
+    try {
+      setIsFetching(true)
+      const popularFromSessionStorage = sessionStorage.getItem('veggie')
+      if (popularFromSessionStorage) {
+        setVeggie(JSON.parse(popularFromSessionStorage))
+        setIsFetching(false)
+        return
+      }
+      const data = await fetchRecipes('random', 'tags', 'vegetarian', 9)
+      setVeggie(data.recipes)
+      sessionStorage.setItem('veggie', JSON.stringify(data.recipes))
       setIsFetching(false)
-      return
+    } catch (error) {
+      console.log(error.message)
     }
-    const data = await fetchRecipes('random', 'tags', 'vegetarian', 9)
-    setVeggie(data.recipes)
-    sessionStorage.setItem('veggie', JSON.stringify(data.recipes))
-    setIsFetching(false)
   }
 
   useEffect(() => {

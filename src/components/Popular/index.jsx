@@ -8,17 +8,21 @@ const Popular = () => {
   const [isFetching, setIsFetching] = useState(false)
 
   const getPopular = async () => {
-    setIsFetching(true)
-    const popularFromSessionStorage = sessionStorage.getItem('popular')
-    if (popularFromSessionStorage) {
-      setPopular(JSON.parse(popularFromSessionStorage))
+    try {
+      setIsFetching(true)
+      const popularFromSessionStorage = sessionStorage.getItem('popular')
+      if (popularFromSessionStorage) {
+        setPopular(JSON.parse(popularFromSessionStorage))
+        setIsFetching(false)
+        return
+      }
+      const data = await fetchRecipes()
+      setPopular(data.recipes)
+      sessionStorage.setItem('popular', JSON.stringify(data.recipes))
       setIsFetching(false)
-      return
+    } catch (error) {
+      console.log(error.message)
     }
-    const data = await fetchRecipes()
-    setPopular(data.recipes)
-    sessionStorage.setItem('popular', JSON.stringify(data.recipes))
-    setIsFetching(false)
   }
 
   useEffect(() => {

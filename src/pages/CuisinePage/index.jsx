@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link, useParams } from 'react-router-dom'
 import { fetchRecipes } from '../../Api'
-import { Card, Grid } from './cuisine-page.styles'
 import Spinner from '../../components/Spinner'
+import CustomGrid from '../../components/CustomGrid'
 
 const CuisinePage = () => {
   const [cuisines, setCuisines] = useState([])
@@ -23,20 +23,7 @@ const CuisinePage = () => {
   return (
     <>
       <h3>{cuisineType} Cuisines</h3>
-      {!isFetching ? (
-        <Grid>
-          {cuisines?.map((recipe) => {
-            return (
-              <Card key={recipe?.id}>
-                <img src={recipe?.image} alt={recipe.title} />
-                <h4>{recipe?.title}</h4>
-              </Card>
-            )
-          })}
-        </Grid>
-      ) : (
-        <Spinner />
-      )}
+      {!isFetching ? <CustomGrid recipes={cuisines} /> : <Spinner />}
     </>
   )
 }
